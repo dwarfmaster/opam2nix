@@ -1,9 +1,10 @@
 {
 	pkgs,
 	ocaml-ng, ocamlPackagesOverride ? ocaml-ng.ocamlPackages_4_13,
+  niv-util ? import ./sources.nix,
 }:
 let
-	sources = pkgs.callPackage ./sources.nix { sourcesFile = ./sources.json; };
+	sources = niv-util { sourcesFile = ./sources.json; inherit pkgs; };
 	ocamlPackages = ocamlPackagesOverride;
 in
 let
